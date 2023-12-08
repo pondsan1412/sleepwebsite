@@ -1,24 +1,16 @@
 {
-    "version": 2,
-    "builds": [
+    "crons": [
       {
-        "src": "index.html",
-        "use": "@vercel/static-build"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/app.js",
-        "dest": "/app.js"
+        "path": "/api/every-minute",
+        "schedule": "* * * * *"
       },
       {
-        "src": "/styles.css",
-        "dest": "/styles.css"
+        "path": "/api/every-hour",
+        "schedule": "0 * * * *"
       },
       {
-        "src": "/(.*)",
-        "dest": "/index.html"
+        "path": "/api/every-day",
+        "schedule": "0 0 * * *"
       }
     ]
   }
-  
