@@ -1,16 +1,46 @@
 {
-    "crons": [
+    "headers": [
       {
-        "path": "/api/every-minute",
-        "schedule": "* * * * *"
+        "source": "/service-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
+        ]
       },
       {
-        "path": "/api/every-hour",
-        "schedule": "0 * * * *"
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          }
+        ]
       },
       {
-        "path": "/api/every-day",
-        "schedule": "0 0 * * *"
+        "source": "/:path*",
+        "has": [
+          {
+            "type": "query",
+            "key": "authorized"
+          }
+        ],
+        "headers": [
+          {
+            "key": "x-authorized",
+            "value": "true"
+          }
+        ]
       }
     ]
   }
+  
